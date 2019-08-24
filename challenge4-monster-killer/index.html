@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Monster killer</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app">
+        <div class="panel scores">
+           <div class="score"  >
+                <h1>Player</h1>                
+                <div class="life-bar">
+                    <div :class="scorePlayer>20 ? 'score' : 'danger'" :style="{width: `${scorePlayer}%`}"></div>
+                </div>
+                <div class="percentage">{{ scorePlayer }} %</div>
+            </div>
+
+            <div class="score" >
+                <h1>Monster</h1>
+                <div class="life-bar">
+                    <div :class="scoreMonster>20 ? 'score' : 'danger'" :style="{width: `${scoreMonster}%`}"></div>
+                </div>
+                <div class="percentage">{{ scoreMonster }} %</div>
+            </div>
+
+            
+        </div>
+     
+        <div class="panel">
+            <div class="buttons" v-if="!finished">
+                <button @click="attack" >Attack</button>
+                <button @click="specialAttack">Special Attack</button>
+                <button @click="cure">Cure</button>
+            </div>
+            <div class="score" v-else>
+               <h1 :class="scoreMonster == 0 ? 'font-green' : 'font-red'"> {{ winner }} won! </h1>
+               <button @click="restart">Restart</button>
+            </div>
+
+        </div>
+        <div class="panel">
+            <ul>
+                <li :class="l.player" v-for="l in log">{{ l.message }}</li>
+            </ul>
+
+
+        </div>
+        
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
